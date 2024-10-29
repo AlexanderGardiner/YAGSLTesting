@@ -6,6 +6,7 @@ package frc.robot;
 
 import java.util.List;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -58,11 +59,11 @@ public class RobotContainer {
         rightJoystick = new CommandJoystick(1);
 
         swerveSubsystem.setDefaultCommand(swerveSubsystem.driveCommand(() -> {
-            return -leftJoystick.getY();
+            return MathUtil.applyDeadband(-leftJoystick.getY(), 0.08);
         }, () -> {
-            return -leftJoystick.getX();
+            return MathUtil.applyDeadband(-leftJoystick.getX(), 0.08);
         }, () -> {
-            return -rightJoystick.getX();
+            return MathUtil.applyDeadband(rightJoystick.getX(), 0.08);
         }));
     }
 }
